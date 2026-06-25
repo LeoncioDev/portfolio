@@ -30,7 +30,8 @@ body::before {
 /* ─── CURSOR GLOW ────────────────────────────────────────────────────────────
    Círculo radial ciano que segue o cursor via JavaScript (main.js).
    700px com opacidade 0.12 no centro — visível mas sem exagero.
-   Começa fora da tela (left: -999px) para não aparecer antes do primeiro movimento. */
+   Começa fora da tela (left: -999px) para não aparecer antes do primeiro movimento.
+   Desativado em touch (pointer: coarse) via main.js — não faz sentido em mobile. */
 .glow {
   position: fixed;
   width: 700px;
@@ -148,15 +149,23 @@ body::before {
 }
 
 /* ─── HERO ───────────────────────────────────────────────────────────────────
-   min-height: 100vh = ocupa a tela inteira na primeira dobra.
-   padding-top: 64px compensa o header fixo.
-   position: relative necessário para o ::after funcionar. */
+   min-height usa 100svh (Small Viewport Height) em vez de 100vh.
+   O motivo: no Chrome Android, 100vh é calculado com a barra de endereço
+   recolhida (viewport máximo), fazendo o hero ser maior que a tela visível
+   e gerando um espaço em branco gigante antes do conteúdo aparecer.
+   100svh garante que o hero caiba exatamente na área visível com a barra
+   de endereço expandida — o estado inicial de qualquer mobile browser.
+   Fallback para 100vh em navegadores que não suportam svh (< 2023). */
 .hero {
   min-height: 100vh;
+  /* fallback para browsers antigos */
+  min-height: 100svh;
+  /* fix correto para mobile — Chrome/Safari/Firefox modernos */
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-top: 64px;
+  /* compensa o header fixo de 64px */
   position: relative;
 }
 
@@ -412,7 +421,16 @@ body::before {
 }
 
 /* ─── MOBILE ─────────────────────────────────────────────────────────────────
-   Abaixo de 768px: esconde o nav, reduz padding e ajusta tamanhos. */
+   Abaixo de 768px: esconde o nav, reduz padding, corrige hero e seções.
+
+   Problemas corrigidos neste breakpoint:
+   1. Espaço em branco no hero → hero usa min-height: 100svh (definido acima)
+      + padding-top reduzido + justify-content: flex-start para não centralizar
+      verticalmente (em telas pequenas, centralizar gera espaço excessivo embaixo)
+   2. Padding das seções excessivo → reduzido de 56px para 40px
+   3. Espaço do hero-scroll → reduzido de 64px para 32px
+   4. Tamanho do hero-name → clamp já cuida, mas adicionamos mínimo explícito
+   5. hero-desc font-size → reduzido para 15px para melhor legibilidade mobile */
 @media (max-width: 768px) {
   .header {
     padding: 0 20px;
@@ -430,11 +448,36 @@ body::before {
     padding: 16px 20px;
   }
 
+  /* Hero mobile — não centraliza verticalmente para evitar espaço em branco.
+     Usa padding-top generoso para empurrar o conteúdo abaixo do header fixo
+     e padding-bottom para respiração no fim da seção. */
+  .hero {
+    justify-content: flex-start;
+    padding-top: 100px;
+    padding-bottom: 48px;
+    min-height: 0;
+    /* remove o min-height no mobile — conteúdo define a altura */
+  }
+
   .hero-name {
     font-size: 2.6rem;
   }
 
+  .hero-desc {
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  /* Reduz o espaço do "scroll to explore" no mobile */
+  .hero-scroll {
+    margin-top: 32px;
+  }
+
   .section {
-    padding: 56px 0;
+    padding: 40px 0;
+  }
+
+  .section-header {
+    margin-bottom: 28px;
   }
 }
