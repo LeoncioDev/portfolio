@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="João Paulo Leôncio — Full Stack Developer from Maceió, Brazil. HTML, CSS, JavaScript, Node.js, React." />
+  <title>João Paulo Leôncio — Full Stack Developer</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+</head>
+
+<body>
+
+  <div class="glow" id="glow"></div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <span class="logo">Leôncio<span>D</span>ev</span>
+
+    <nav class="nav">
+      <a href="#about" class="nav-link active" data-section="about">About</a>
+      <a href="#stack" class="nav-link" data-section="stack">Stack</a>
+      <a href="#projects" class="nav-link" data-section="projects">Projects</a>
+      <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+    </nav>
+
+    <div class="header-right">
+      <a href="https://github.com/LeoncioDev" target="_blank" rel="noopener" class="gh-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- HERO -->
+    <section class="hero" id="about">
+      <p class="hero-tag reveal">Full Stack Developer · Maceió, Brazil</p>
+      <h1 class="hero-name reveal d1">João Paulo<br>Leôncio</h1>
+      <p class="hero-role reveal d2">Building things for the <strong>web.</strong></p>
+      <p class="hero-desc reveal d3">
+        I build complete web products — from the API that powers the data
+        to the interface that makes it beautiful. React on the front,
+        Node.js on the back, and whatever the problem needs in between.
+      </p>
+      <div class="hero-cta reveal d4">
+        <a href="#projects" class="btn-primary">See my work</a>
+        <a href="mailto:leonciodev@proton.me" class="btn-ghost">Get in touch</a>
+      </div>
+      <div class="hero-scroll reveal d4">
+        <span class="scroll-line"></span>
+        scroll to explore
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about-detail">
+      <div class="section-header reveal">
+        <span class="section-num">01</span>
+        <h2 class="section-title">About</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <p class="about-text reveal d1">
+            Developer from Maceió, Brazil. I started building backends and
+            fell in love with the full picture — not just the logic behind the
+            curtain, but the interface that makes it usable and the design that
+            makes people want to use it.
+          </p>
+          <p class="about-text reveal d2">
+            I build complete products: the API, the database connections, the
+            frontend — and I ship the whole thing. No half-finished backends
+            waiting for someone else. Currently studying Systems Analysis and
+            Development at CESMAC.
+          </p>
+        </div>
+
+        <div class="about-info reveal d2">
+          <div class="info-row">
+            <span class="info-label">Location</span>
+            <span class="info-value">Maceió, Alagoas — Brazil</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Education</span>
+            <span class="info-value">ADS · CESMAC · 2026</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Focus</span>
+            <span class="info-value">React · Node.js · Full Stack</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">LinkedIn</span>
+            <span class="info-value"><a href="https://linkedin.com/in/leonciodev" target="_blank">leonciodev</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Email</span>
+            <span class="info-value"><a href="mailto:leonciodev@proton.me">leonciodev@proton.me</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section class="section" id="stack">
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Stack</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="stack-list">
+
+        <div class="stack-row reveal d1">
+          <span class="stack-cat">Frontend</span>
+          <div class="tags">
+            <span class="tag tag-hi">React</span>
+            <span class="tag tag-hi">JavaScript</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Tailwind CSS</span>
+          </div>
+        </div>
+
+        <div class="stack-row reveal d2">
+          <span class="stack-cat">Backend</span>
+          <div class="tags">
+            <span class="tag tag-hi">Node.js</span>
+            <span class="tag tag-hi">Express</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">WebSocket</span>
+          </div>
+        </div>
+
+        <div class="stack-row reveal d3">
+          <span class="stack-cat">AI / Data</span>
+          <div class="tags">
+            <span class="tag">LLaMA 3.3 70B</span>
+            <span class="tag">LLaMA 3.1 8B</span>
+            <span class="tag">Groq API</span>
+            <span class="tag">Binance API</span>
+            <span class="tag">GitHub API</span>
+            <span class="tag">CoinGecko API</span>
+          </div>
+        </div>
+
+        <div class="stack-row reveal d4">
+          <span class="stack-cat">Tools</span>
+          <div class="tags">
+            <span class="tag">Git</span>
+            <span class="tag">Linux</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">npm</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="section-header reveal">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Projects</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="projects-list">
+
+        <!-- Scrutiny -->
+        <a href="https://github.com/LeoncioDev/Scrutiny" target="_blank" rel="noopener" class="project-card reveal">
+          <div class="project-terminal">
+            <div class="tdots">
+              <span class="td td-r"></span>
+              <span class="td td-y"></span>
+              <span class="td td-g"></span>
+            </div>
+            <span class="tpath">~/projects/scrutiny</span>
+            <span class="tlink">↗ GitHub</span>
+          </div>
+          <div class="project-img-wrap">
+            <img src="assets/screenshots/tela_limpa.png" alt="Scrutiny" class="project-img" loading="lazy" />
+            <div class="img-overlay">
+              <span class="overlay-btn">View on GitHub</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-header-row">
+              <h3 class="project-name">Scrutiny</h3>
+              <span class="project-badge">AI · Node.js</span>
+            </div>
+            <p class="project-desc">
+              AI-powered GitHub profile analyzer. Enter any username and get a full
+              technical report — code quality, inferred seniority, language patterns,
+              and job-fit score. Dual-model pipeline: LLaMA 3.1 8B filters repos,
+              LLaMA 3.3 70B runs the deep analysis via Groq.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Groq API</span>
+              <span class="project-tag">LLaMA 3.3 70B</span>
+              <span class="project-tag">GitHub API</span>
+              <span class="project-tag">HTML / CSS / JS</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Zenith -->
+        <a href="https://github.com/LeoncioDev/zenith" target="_blank" rel="noopener" class="project-card reveal d1">
+          <div class="project-terminal">
+            <div class="tdots">
+              <span class="td td-r"></span>
+              <span class="td td-y"></span>
+              <span class="td td-g"></span>
+            </div>
+            <span class="tpath">~/projects/zenith</span>
+            <span class="tlink">↗ GitHub</span>
+          </div>
+          <div class="project-img-wrap">
+            <img src="assets/screenshots/zenith.png" alt="Zenith" class="project-img" loading="lazy" />
+            <div class="img-overlay">
+              <span class="overlay-btn">View on GitHub</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-header-row">
+              <h3 class="project-name">Zenith</h3>
+              <span class="project-badge">Real-time · Node.js</span>
+            </div>
+            <p class="project-desc">
+              Real-time crypto dashboard with multiple themes. Live price feeds via
+              Binance WebSocket, Fear &amp; Greed index, historical data from CoinGecko,
+              currency converter — all updating without a single page refresh.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">WebSocket</span>
+              <span class="project-tag">Binance API</span>
+              <span class="project-tag">CoinGecko API</span>
+              <span class="project-tag">HTML / CSS / JS</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Contact</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="contact-wrap">
+        <div class="reveal d1">
+          <h3 class="contact-heading">
+            Let's build<br><span>something.</span>
+          </h3>
+          <p class="contact-sub">
+            Open to full stack roles, freelance projects,
+            and interesting problems. Feel free to reach out.
+          </p>
+        </div>
+
+        <div class="contact-links reveal d2">
+          <a href="mailto:leonciodev@proton.me" class="contact-link">
+            <span class="cl-label">Email</span>
+            <span class="cl-value">LeoncioDev@proton.me ↗</span>
+          </a>
+          <a href="https://linkedin.com/in/leonciodev" target="_blank" rel="noopener" class="contact-link">
+            <span class="cl-label">LinkedIn</span>
+            <span class="cl-value">linkedin.com/in/LeoncioDev ↗</span>
+          </a>
+          <a href="https://github.com/LeoncioDev" target="_blank" rel="noopener" class="contact-link">
+            <span class="cl-label">GitHub</span>
+            <span class="cl-value">github.com/LeoncioDev ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span class="footer-text">© 2026 João Paulo Leôncio · Maceió, Brazil</span>
+    <span class="footer-stack">Built with <span>HTML · CSS · JS</span></span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

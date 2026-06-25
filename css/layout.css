@@ -1,0 +1,440 @@
+/**
+ * layout.css — Estrutura e layout global do portfólio
+ *
+ * Contém:
+ * - Textura de ruído no fundo
+ * - Cursor glow ciano
+ * - Header fixo com nav
+ * - Container principal
+ * - Hero section
+ * - Estrutura das seções numeradas
+ * - Animações de reveal
+ * - Footer
+ * - Breakpoints mobile
+ */
+
+/* ─── NOISE TEXTURE ─────────────────────────────────────────────────────────
+   SVG inline com filtro feTurbulence cria uma textura de ruído sutil no fundo.
+   pointer-events: none garante que não interfere com cliques.
+   Adiciona profundidade visual sem imagens externas. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ─── CURSOR GLOW ────────────────────────────────────────────────────────────
+   Círculo radial ciano que segue o cursor via JavaScript (main.js).
+   700px com opacidade 0.12 no centro — visível mas sem exagero.
+   Começa fora da tela (left: -999px) para não aparecer antes do primeiro movimento. */
+.glow {
+  position: fixed;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.12) 0%, rgba(34, 211, 238, 0.04) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  left: -999px;
+  top: -999px;
+  transition: left 0.08s, top 0.08s;
+}
+
+/* ─── HEADER ─────────────────────────────────────────────────────────────────
+   Fixo no topo. backdrop-filter: blur() cria o efeito de vidro fosco.
+   A sombra é adicionada via JavaScript ao scrollar (main.js). */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(8, 12, 16, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Logo — LeôncioDev com D ciano */
+.logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.logo span {
+  color: var(--cyan);
+}
+
+/* D em ciano */
+
+/* Nav — links de navegação */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  padding: 6px 14px;
+  border-radius: 6px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color var(--t), background var(--t);
+}
+
+.nav-link:hover {
+  color: var(--text-mid);
+  background: var(--bg-3);
+}
+
+.nav-link.active {
+  color: var(--cyan);
+}
+
+/* definido pelo scroll spy em main.js */
+
+/* Botão GitHub no lado direito do header */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gh-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-mid);
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--bg-2);
+  transition: all var(--t);
+  letter-spacing: 0.04em;
+}
+
+.gh-btn:hover {
+  color: var(--cyan);
+  border-color: rgba(34, 211, 238, 0.3);
+  background: var(--cyan-dim);
+}
+
+/* ─── CONTAINER PRINCIPAL ────────────────────────────────────────────────────
+   z-index: 1 garante que o conteúdo fique sobre o noise texture (z-index: 0).
+   max-width: 960px centraliza o conteúdo em telas largas. */
+.main {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 48px 100px;
+}
+
+/* ─── HERO ───────────────────────────────────────────────────────────────────
+   min-height: 100vh = ocupa a tela inteira na primeira dobra.
+   padding-top: 64px compensa o header fixo.
+   position: relative necessário para o ::after funcionar. */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 64px;
+  position: relative;
+}
+
+/* Gradiente decorativo no canto superior direito — dá profundidade ao hero */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.07) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Garante que o conteúdo fique acima do gradiente decorativo */
+.hero>* {
+  position: relative;
+  z-index: 1;
+}
+
+/* Tag acima do nome — "Full Stack Developer · Maceió, Brazil" */
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--cyan);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* Linha decorativa antes da tag */
+.hero-tag::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--cyan);
+}
+
+/* Nome — branco brilhante com text-shadow ciano sutil para dar vida
+   Nota: background-clip: text foi evitado pois causa instabilidade
+   em alguns navegadores deixando o texto invisível/transparente. */
+.hero-name {
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  /* levemente maior — impacto profissional */
+  font-weight: 800;
+  color: #f0f8ff;
+  text-shadow: 0 0 80px rgba(34, 211, 238, 0.2);
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+  margin-bottom: 8px;
+}
+
+/* Cargo — tamanho proporcional ao nome */
+.hero-role {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  color: var(--text-mid);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 28px;
+}
+
+.hero-role strong {
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+/* Descrição curta abaixo do cargo */
+.hero-desc {
+  font-size: 16px;
+  /* 16px — padrão de legibilidade para descrições em portfólios */
+  color: var(--text-mid);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 40px;
+}
+
+/* Botões CTA */
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Botão primário — fundo ciano com glow estático para chamar atenção */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  background: var(--cyan);
+  color: #080c10;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+  transition: all var(--t);
+  border: 1px solid var(--cyan);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.45);
+}
+
+/* Botão ghost — borda sutil, fica ciano no hover */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  background: transparent;
+  color: var(--text-mid);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  letter-spacing: 0.02em;
+  transition: all var(--t);
+}
+
+.btn-ghost:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  background: var(--cyan-dim);
+  transform: translateY(-2px);
+}
+
+/* Indicador de scroll no rodapé do hero */
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 64px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.scroll-line {
+  width: 40px;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─── SEÇÕES NUMERADAS ───────────────────────────────────────────────────────
+   Cada seção tem um número (01, 02...), título e linha decorativa. */
+.section {
+  padding: 80px 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--cyan);
+  letter-spacing: 0.1em;
+}
+
+.section-title {
+  font-size: 1.7rem;
+  /* levemente maior para hierarquia clara */
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+}
+
+/* Linha decorativa que estica à direita do título */
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  max-width: 200px;
+}
+
+/* ─── REVEAL ANIMATION ───────────────────────────────────────────────────────
+   Elementos com .reveal começam invisíveis e deslocados para baixo.
+   Quando o IntersectionObserver (main.js) adiciona .in, a transição anima.
+   Classes .d1-.d4 adicionam delays escalonados para efeito cascata. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--ts) var(--ease), transform var(--ts) var(--ease);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d1 {
+  transition-delay: 0.08s;
+}
+
+.d2 {
+  transition-delay: 0.16s;
+}
+
+.d3 {
+  transition-delay: 0.24s;
+}
+
+.d4 {
+  transition-delay: 0.32s;
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────────────────────────
+   Mesmo max-width e padding do .main para alinhamento perfeito. */
+.footer {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px 48px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-text {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+.footer-stack {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+.footer-stack span {
+  color: var(--cyan);
+}
+
+/* ─── MOBILE ─────────────────────────────────────────────────────────────────
+   Abaixo de 768px: esconde o nav, reduz padding e ajusta tamanhos. */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 20px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .main {
+    padding: 0 20px 60px;
+  }
+
+  .footer {
+    padding: 16px 20px;
+  }
+
+  .hero-name {
+    font-size: 2.6rem;
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+}

@@ -1,0 +1,463 @@
+/**
+ * sections.css — Estilos específicos de cada seção do portfólio
+ *
+ * Contém:
+ * - About (grid texto + card de info)
+ * - Stack (lista de tecnologias por categoria)
+ * - Projects (cards com terminal header + imagem)
+ * - Contact (heading + links)
+ * - Breakpoints mobile para cada seção
+ */
+
+/* ─── ABOUT ──────────────────────────────────────────────────────────────────
+   Grid de duas colunas: texto à esquerda, card de info à direita.
+   Em mobile colapsa para uma coluna. */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Parágrafos do texto de apresentação */
+.about-text {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+
+.about-text:last-of-type {
+  margin-bottom: 0;
+}
+
+.about-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Card de informações (localização, educação, email, etc.) */
+.about-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Linha individual do card */
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--t);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row:hover {
+  background: var(--bg-3);
+}
+
+/* Label pequena acima do valor (ex: "LOCATION") */
+.info-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Valor da informação */
+.info-value {
+  font-size: 13px;
+  color: var(--text-mid);
+}
+
+.info-value a {
+  color: var(--cyan);
+  transition: opacity var(--t);
+}
+
+.info-value a:hover {
+  opacity: 0.75;
+}
+
+/* ─── STACK ──────────────────────────────────────────────────────────────────
+   Lista de tecnologias organizada por categoria (Frontend, Backend, etc.).
+   Grid de duas colunas: categoria à esquerda, tags à direita. */
+.stack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stack-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: start;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.stack-row:first-child {
+  border-top: 1px solid var(--border);
+}
+
+/* Label da categoria (ex: "FRONTEND") */
+.stack-cat {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-top: 4px;
+}
+
+/* Container das tags de tecnologia */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Tag individual */
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  transition: all var(--t);
+  cursor: default;
+}
+
+.tag:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+/* Variante destacada — tecnologias foco (React, Node.js, Tailwind) */
+.tag-hi {
+  background: var(--cyan-dim);
+  border-color: rgba(34, 211, 238, 0.25);
+  color: var(--cyan);
+}
+
+/* ─── PROJECTS ───────────────────────────────────────────────────────────────
+   Cards horizontais com:
+   - Header estilo terminal (dots + path + link)
+   - Imagem à esquerda com overlay no hover
+   - Informações à direita (nome, descrição, tags)
+   Em mobile colapsa para layout vertical. */
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Card — grid de duas colunas: imagem | info */
+.project-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color var(--t), box-shadow var(--t), transform var(--t);
+}
+
+/* Hover com glow ciano sutil ao redor do card */
+.project-card:hover {
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(34, 211, 238, 0.06);
+  transform: translateY(-2px);
+}
+
+/* Header estilo terminal — ocupa as duas colunas com grid-column: 1 / -1 */
+.project-terminal {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--bg-3);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Dots decorativos do terminal (vermelho, amarelo, verde) */
+.tdots {
+  display: flex;
+  gap: 5px;
+}
+
+.td {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0.4;
+  transition: opacity var(--t);
+}
+
+.project-card:hover .td {
+  opacity: 1;
+}
+
+/* dots ficam opacos no hover */
+.td-r {
+  background: #ff5f57;
+}
+
+.td-y {
+  background: #febc2e;
+}
+
+.td-g {
+  background: #28c840;
+}
+
+/* Caminho do projeto no terminal (ex: ~/projects/zenith) */
+.tpath {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  flex: 1;
+  margin-left: 8px;
+}
+
+/* Link "↗ GitHub" no lado direito do terminal */
+.tlink {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  transition: color var(--t);
+}
+
+.project-card:hover .tlink {
+  color: var(--cyan);
+}
+
+/* Wrapper da imagem */
+.project-img-wrap {
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+}
+
+/* Imagem — brightness 0.75 visível desde o início, satura no hover */
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: brightness(0.75) saturate(0.7);
+  transition: filter var(--ts), transform var(--ts);
+}
+
+.project-card:hover .project-img {
+  filter: brightness(0.95) saturate(1.0);
+  transform: scale(1.04);
+}
+
+/* Overlay com botão "View on GitHub" — aparece no hover */
+.img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 12, 16, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--t);
+}
+
+.project-card:hover .img-overlay {
+  opacity: 1;
+}
+
+.overlay-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--cyan);
+  padding: 8px 16px;
+  border: 1px solid var(--cyan);
+  border-radius: 6px;
+  letter-spacing: 0.06em;
+}
+
+/* Área de informações do projeto */
+.project-info {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.project-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Nome do projeto — fica ciano no hover */
+.project-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  transition: color var(--t);
+}
+
+.project-card:hover .project-name {
+  color: var(--cyan);
+}
+
+/* Badge de tecnologia (ex: "AI · Node.js") */
+.project-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  padding: 2px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* Descrição do projeto */
+.project-desc {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+
+/* Tags de stack do projeto */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.project-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+/* ─── CONTACT ────────────────────────────────────────────────────────────────
+   Grid de duas colunas: heading à esquerda, links à direita. */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Heading grande com palavra em ciano */
+.contact-heading {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.contact-heading span {
+  color: var(--cyan);
+}
+
+.contact-sub {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+
+/* Lista de links de contato */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Link individual — desliza para direita no hover */
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all var(--t);
+}
+
+.contact-link:hover {
+  border-color: rgba(34, 211, 238, 0.3);
+  background: var(--bg-3);
+  transform: translateX(4px);
+}
+
+/* Label pequena (ex: "EMAIL") */
+.cl-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Valor — fica ciano no hover */
+.cl-value {
+  font-size: 13px;
+  color: var(--text-mid);
+  transition: color var(--t);
+}
+
+.contact-link:hover .cl-value {
+  color: var(--cyan);
+}
+
+/* ─── MOBILE ─────────────────────────────────────────────────────────────────
+   Todas as grids de duas colunas colapsam para uma coluna. */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .project-img-wrap {
+    min-height: 160px;
+  }
+
+  .stack-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .contact-wrap {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
