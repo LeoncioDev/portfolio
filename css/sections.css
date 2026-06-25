@@ -4,7 +4,7 @@
  * Contém:
  * - About (grid texto + card de info)
  * - Stack (lista de tecnologias por categoria)
- * - Projects (cards com terminal header + imagem)
+ * - Projects (cards com terminal header + imagem + botões de ação)
  * - Contact (heading + links)
  * - Breakpoints mobile para cada seção
  */
@@ -155,11 +155,17 @@
 }
 
 /* ─── PROJECTS ───────────────────────────────────────────────────────────────
-   Cards horizontais com:
-   - Header estilo terminal (dots + path + link)
-   - Imagem à esquerda com overlay no hover
-   - Informações à direita (nome, descrição, tags)
-   Em mobile colapsa para layout vertical. */
+   Cards com:
+   - Header estilo terminal (dots + path)
+   - Imagem à esquerda
+   - Informações à direita (nome, descrição, tags, botões)
+   - Dois botões de ação: Live Demo (primário) + GitHub (secundário)
+
+   Decisão de design:
+   O card passou de <a> (link inteiro) para <article> (container semântico).
+   Isso é o padrão profissional de 2025/2026 — separar claramente as duas
+   ações (demo vs código) melhora a UX e sinaliza maturidade para recrutadores.
+   Fonte: pesquisa de portfolios de devs top no GitHub e artigos UX 2025/2026. */
 .projects-list {
   display: flex;
   flex-direction: column;
@@ -174,7 +180,6 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  text-decoration: none;
   transition: border-color var(--t), box-shadow var(--t), transform var(--t);
 }
 
@@ -236,18 +241,6 @@
   margin-left: 8px;
 }
 
-/* Link "↗ GitHub" no lado direito do terminal */
-.tlink {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text-dim);
-  transition: color var(--t);
-}
-
-.project-card:hover .tlink {
-  color: var(--cyan);
-}
-
 /* Wrapper da imagem */
 .project-img-wrap {
   position: relative;
@@ -270,32 +263,6 @@
   transform: scale(1.04);
 }
 
-/* Overlay com botão "View on GitHub" — aparece no hover */
-.img-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(8, 12, 16, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity var(--t);
-}
-
-.project-card:hover .img-overlay {
-  opacity: 1;
-}
-
-.overlay-btn {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--cyan);
-  padding: 8px 16px;
-  border: 1px solid var(--cyan);
-  border-radius: 6px;
-  letter-spacing: 0.06em;
-}
-
 /* Área de informações do projeto */
 .project-info {
   padding: 20px 24px;
@@ -312,7 +279,7 @@
   gap: 10px;
 }
 
-/* Nome do projeto — fica ciano no hover */
+/* Nome do projeto — fica ciano no hover do card */
 .project-name {
   font-size: 1.15rem;
   font-weight: 700;
@@ -359,6 +326,62 @@
   background: var(--bg-3);
   border: 1px solid var(--border);
   color: var(--text-dim);
+}
+
+/* ── Botões de ação do projeto ───────────────────────────────────────────────
+   Dois botões lado a lado: Live Demo (ciano sólido) e GitHub (ghost).
+   Borda de 2px nos dois para ter presença visual igual aos botões do hero —
+   foi o ajuste pedido para deixar os botões menos discretos no card.
+
+   Live Demo é sempre o primeiro — padrão UX para portfolios de dev:
+   recrutadores clicam em demo primeiro, código depois. */
+.project-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* Base comum dos botões do projeto */
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all var(--t);
+  white-space: nowrap;
+}
+
+/* Live Demo — fundo ciano com borda 2px, igual ao btn-primary do hero */
+.project-btn-primary {
+  background: var(--cyan);
+  color: #080c10;
+  border: 2px solid var(--cyan);
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+}
+
+.project-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(34, 211, 238, 0.4);
+}
+
+/* GitHub — ghost com borda 2px, igual ao btn-ghost do hero */
+.project-btn-ghost {
+  background: transparent;
+  color: var(--text-mid);
+  border: 2px solid var(--border);
+}
+
+.project-btn-ghost:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  background: var(--cyan-dim);
+  transform: translateY(-1px);
 }
 
 /* ─── CONTACT ────────────────────────────────────────────────────────────────
@@ -459,5 +482,10 @@
   .contact-wrap {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  /* Em mobile os botões quebram linha se não couberem */
+  .project-actions {
+    flex-wrap: wrap;
   }
 }

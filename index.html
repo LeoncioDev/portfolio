@@ -177,7 +177,11 @@
       <div class="projects-list">
 
         <!-- Scrutiny -->
-        <a href="https://github.com/LeoncioDev/Scrutiny" target="_blank" rel="noopener" class="project-card reveal">
+        <!-- O card agora é um <article> — não é mais um link clicável inteiro.
+             Os botões dentro do .project-actions assumem a navegação.
+             Isso segue o padrão profissional de 2025/2026 onde cada ação
+             tem seu próprio alvo claro (Demo vs GitHub). -->
+        <article class="project-card reveal">
           <div class="project-terminal">
             <div class="tdots">
               <span class="td td-r"></span>
@@ -185,13 +189,9 @@
               <span class="td td-g"></span>
             </div>
             <span class="tpath">~/projects/scrutiny</span>
-            <span class="tlink">↗ GitHub</span>
           </div>
           <div class="project-img-wrap">
             <img src="assets/screenshots/tela_limpa.png" alt="Scrutiny" class="project-img" loading="lazy" />
-            <div class="img-overlay">
-              <span class="overlay-btn">View on GitHub</span>
-            </div>
           </div>
           <div class="project-info">
             <div class="project-header-row">
@@ -210,11 +210,24 @@
               <span class="project-tag">GitHub API</span>
               <span class="project-tag">HTML / CSS / JS</span>
             </div>
+            <!-- Botões de ação: Live Demo (primário) + GitHub (secundário).
+                 stopPropagation() previne que o clique nos botões
+                 acione eventos do card pai. -->
+            <div class="project-actions">
+              <a href="https://scrutiny.leonciodev.me" target="_blank" rel="noopener"
+                class="project-btn project-btn-primary" onclick="event.stopPropagation()">
+                Live Demo ↗
+              </a>
+              <a href="https://github.com/LeoncioDev/Scrutiny" target="_blank" rel="noopener"
+                class="project-btn project-btn-ghost" onclick="event.stopPropagation()">
+                GitHub ↗
+              </a>
+            </div>
           </div>
-        </a>
+        </article>
 
         <!-- Zenith -->
-        <a href="https://github.com/LeoncioDev/zenith" target="_blank" rel="noopener" class="project-card reveal d1">
+        <article class="project-card reveal d1">
           <div class="project-terminal">
             <div class="tdots">
               <span class="td td-r"></span>
@@ -222,13 +235,9 @@
               <span class="td td-g"></span>
             </div>
             <span class="tpath">~/projects/zenith</span>
-            <span class="tlink">↗ GitHub</span>
           </div>
           <div class="project-img-wrap">
             <img src="assets/screenshots/zenith.png" alt="Zenith" class="project-img" loading="lazy" />
-            <div class="img-overlay">
-              <span class="overlay-btn">View on GitHub</span>
-            </div>
           </div>
           <div class="project-info">
             <div class="project-header-row">
@@ -246,8 +255,18 @@
               <span class="project-tag">CoinGecko API</span>
               <span class="project-tag">HTML / CSS / JS</span>
             </div>
+            <div class="project-actions">
+              <a href="https://zenith.leonciodev.me" target="_blank" rel="noopener"
+                class="project-btn project-btn-primary" onclick="event.stopPropagation()">
+                Live Demo ↗
+              </a>
+              <a href="https://github.com/LeoncioDev/zenith" target="_blank" rel="noopener"
+                class="project-btn project-btn-ghost" onclick="event.stopPropagation()">
+                GitHub ↗
+              </a>
+            </div>
           </div>
-        </a>
+        </article>
 
       </div>
     </section>
