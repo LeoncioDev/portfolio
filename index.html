@@ -9,11 +9,11 @@
   <title>João Paulo Leôncio — Full Stack Developer</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
-  <!-- CSS com cache busting — ?v=2 força o browser a buscar versão nova -->
-  <link rel="stylesheet" href="css/tokens.css?v=2" />
-  <link rel="stylesheet" href="css/animations.css?v=2" />
-  <link rel="stylesheet" href="css/layout.css?v=2" />
-  <link rel="stylesheet" href="css/sections.css?v=2" />
+  <!-- CSS com cache busting — ?v=3 força o browser a buscar versão nova -->
+  <link rel="stylesheet" href="css/tokens.css?v=3" />
+  <link rel="stylesheet" href="css/animations.css?v=3" />
+  <link rel="stylesheet" href="css/layout.css?v=3" />
+  <link rel="stylesheet" href="css/sections.css?v=3" />
 </head>
 
 <body>
@@ -259,23 +259,26 @@
           </div>
 
           <div class="project-img-wrap">
-            <img src="assets/screenshots/tela_limpa.png" alt="Scrutiny — AI-powered GitHub profile analyzer"
-              class="project-img" loading="lazy" />
+            <img src="assets/screenshots/tela_limpa.png" alt="Scrutiny — GitHub profile analyzer" class="project-img"
+              loading="lazy" />
           </div>
 
           <div class="project-info">
 
             <div class="project-header-row">
               <h3 class="project-name">Scrutiny</h3>
-              <span class="project-badge">Node.js · AI Pipeline</span>
+              <!-- Badge atualizado — reflete a v3 -->
+              <span class="project-badge">Node.js · GitHub API</span>
             </div>
 
+            <!-- Descrição atualizada para a v3 -->
             <p class="project-desc">
-              AI-powered GitHub profile analyzer. Dual-model pipeline:
-              LLaMA 3.1 8B filters repos, LLaMA 3.3 70B runs deep analysis via Groq.
-              Outputs seniority score, code patterns, and job-fit rating.
+              Analyze any GitHub profile and get an honest opinion about the projects.
+              Reads READMEs, detects technologies across recent repositories,
+              and generates a direct assessment — no fake scores, no hallucinated analysis.
             </p>
 
+            <!-- Tags atualizadas — sem LLaMA 3.1 8B que não é mais usado -->
             <div class="project-tags">
               <span class="project-tag">Groq API</span>
               <span class="project-tag">LLaMA 3.3 70B</span>
@@ -404,13 +407,13 @@
   </footer>
 
   <!-- ══════════════════════════════════════════════════════════
-       SCRIPTS com cache busting ?v=2
+       SCRIPTS com cache busting ?v=3
        Ordem: cursor → particles → typed → main
        ══════════════════════════════════════════════════════════ -->
-  <script src="js/cursor.js?v=2"></script>
-  <script src="js/particles.js?v=2"></script>
-  <script src="js/typed.js?v=2"></script>
-  <script src="js/main.js?v=2"></script>
+  <script src="js/cursor.js?v=3"></script>
+  <script src="js/particles.js?v=3"></script>
+  <script src="js/typed.js?v=3"></script>
+  <script src="js/main.js?v=3"></script>
 
   <!-- ══════════════════════════════════════════════════════════
        SERVICE WORKER — network first
