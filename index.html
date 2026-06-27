@@ -9,11 +9,11 @@
   <title>João Paulo Leôncio — Full Stack Developer</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
-  <!-- CSS: tokens → animations → layout → sections -->
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/sections.css" />
+  <!-- CSS com cache busting — ?v=2 força o browser a buscar versão nova -->
+  <link rel="stylesheet" href="css/tokens.css?v=2" />
+  <link rel="stylesheet" href="css/animations.css?v=2" />
+  <link rel="stylesheet" href="css/layout.css?v=2" />
+  <link rel="stylesheet" href="css/sections.css?v=2" />
 </head>
 
 <body>
@@ -74,8 +74,7 @@
       <!-- Texto digitado + cursor piscante + linha decorativa -->
       <div class="hero-accent-line">
         <span class="hal-text">
-          <!-- .hal-typed é preenchido via typed.js -->
-          <!-- Frase fixa: "Full Stack Developer." -->
+          <!-- .hal-typed preenchido via typed.js — digita "Full Stack Developer." uma vez -->
           <span class="hal-typed"></span>
           <!-- Cursor piscante: animação blink em animations.css -->
           <span class="hal-cursor" aria-hidden="true">|</span>
@@ -83,7 +82,7 @@
         <span class="hal-line"></span>
       </div>
 
-      <!-- Descrição — voz direta, sem frescura, sem template -->
+      <!-- Descrição — voz direta, sem template -->
       <p class="hero-desc">
         I don't just write code.<br>
         I build the whole thing — from the API to the interface —<br>
@@ -99,23 +98,20 @@
       <!-- Stats: números reais e diretos -->
       <div class="hero-stats">
         <div class="hero-stat">
-          <!-- Projetos publicados e no ar -->
           <div class="hs-num">3+</div>
           <div class="hs-label">Live projects</div>
         </div>
         <div class="hero-stat">
-          <!-- Frontend e backend — os dois lados -->
           <div class="hs-num">Front</div>
           <div class="hs-label">& Backend</div>
         </div>
         <div class="hero-stat">
-          <!-- Maceió, Brazil -->
           <div class="hs-num">BR</div>
           <div class="hs-label">Maceió, Brazil</div>
         </div>
       </div>
 
-      <!-- Scroll indicator animado — convida o usuário a rolar -->
+      <!-- Scroll indicator animado -->
       <div class="scroll-indicator" aria-hidden="true">
         <div class="scroll-wheel"></div>
         <span>scroll</span>
@@ -167,16 +163,13 @@
 
           <div class="info-row">
             <span class="info-label">Focus</span>
-            <!-- React e Node.js = suas tecnologias principais -->
             <span class="info-value">React · Node.js · Full Stack</span>
           </div>
 
           <div class="info-row">
             <span class="info-label">LinkedIn</span>
             <span class="info-value">
-              <a href="https://linkedin.com/in/leonciodev" target="_blank" rel="noopener">
-                leonciodev
-              </a>
+              <a href="https://linkedin.com/in/leonciodev" target="_blank" rel="noopener">leonciodev</a>
             </span>
           </div>
 
@@ -193,8 +186,8 @@
 
     <!-- ══════════════════════════════════════════════════════════
          STACK
-         Apenas habilidades reais — tecnologias que você domina.
-         APIs e ferramentas de projetos específicos ficam nos cards.
+         Apenas habilidades reais.
+         Tecnologias de projetos específicos ficam nos cards.
          ══════════════════════════════════════════════════════════ -->
     <section class="section" id="stack">
 
@@ -206,7 +199,6 @@
 
       <div class="stack-list">
 
-        <!-- Languages & Frameworks -->
         <div class="stack-row reveal d1">
           <span class="stack-cat">Languages</span>
           <div class="tags">
@@ -216,7 +208,6 @@
           </div>
         </div>
 
-        <!-- Frameworks & Libraries -->
         <div class="stack-row reveal d2">
           <span class="stack-cat">Frameworks</span>
           <div class="tags">
@@ -228,7 +219,7 @@
           </div>
         </div>
 
-        <!-- Sistema operacional e editor — o ambiente onde você trabalha -->
+        <!-- Sistema operacional e editor onde você trabalha -->
         <div class="stack-row reveal d3">
           <span class="stack-cat">Environment</span>
           <div class="tags">
@@ -243,8 +234,7 @@
 
     <!-- ══════════════════════════════════════════════════════════
          PROJECTS
-         As tags dos projetos mostram tecnologias UTILIZADAS
-         naquele projeto específico — diferente da Stack geral.
+         Tags = tecnologias usadas naquele projeto específico.
          ══════════════════════════════════════════════════════════ -->
     <section class="section" id="projects">
 
@@ -257,11 +247,8 @@
       <div class="projects-list">
 
         <!-- ── Scrutiny ──────────────────────────────────────── -->
-        <!-- <article> semântico — não é um link inteiro.
-             Dois botões separados: Live Demo + GitHub.           -->
         <article class="project-card reveal">
 
-          <!-- Header estilo terminal macOS -->
           <div class="project-terminal">
             <div class="tdots">
               <span class="td td-r"></span>
@@ -271,7 +258,6 @@
             <span class="tpath">~/projects/scrutiny</span>
           </div>
 
-          <!-- Screenshot do projeto -->
           <div class="project-img-wrap">
             <img src="assets/screenshots/tela_limpa.png" alt="Scrutiny — AI-powered GitHub profile analyzer"
               class="project-img" loading="lazy" />
@@ -281,7 +267,6 @@
 
             <div class="project-header-row">
               <h3 class="project-name">Scrutiny</h3>
-              <!-- Badge mostra o tipo e tecnologia principal do projeto -->
               <span class="project-badge">Node.js · AI Pipeline</span>
             </div>
 
@@ -291,7 +276,6 @@
               Outputs seniority score, code patterns, and job-fit rating.
             </p>
 
-            <!-- Tags = tecnologias utilizadas NESTE projeto específico -->
             <div class="project-tags">
               <span class="project-tag">Groq API</span>
               <span class="project-tag">LLaMA 3.3 70B</span>
@@ -381,7 +365,6 @@
       <div class="contact-wrap">
 
         <div class="reveal d1">
-          <!-- "something." em cinza — detalhe de hierarquia -->
           <h3 class="contact-heading">
             Let's build<br><span>something.</span>
           </h3>
@@ -417,22 +400,28 @@
        ══════════════════════════════════════════════════════════ -->
   <footer class="footer">
     <span class="footer-text">© 2026 João Paulo Leôncio · Maceió, Brazil</span>
-    <!-- Stack em cinza — detalhe final de identidade -->
     <span class="footer-stack">Built with <span>HTML · CSS · JS</span></span>
   </footer>
 
   <!-- ══════════════════════════════════════════════════════════
-       SCRIPTS — ordem importa:
-       deco.js     → elemento geométrico decorativo (canvas fixo)
-       cursor.js   → cursor personalizado (dot + ring)
-       particles.js → partículas em toda a tela (canvas fixo)
-       typed.js    → efeito de digitação no hero
-       main.js     → scroll spy, reveal, header, glow, section lines
+       SCRIPTS com cache busting ?v=2
+       Ordem: cursor → particles → typed → main
        ══════════════════════════════════════════════════════════ -->
-  <script src="js/cursor.js"></script>
-  <script src="js/particles.js"></script>
-  <script src="js/typed.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/cursor.js?v=2"></script>
+  <script src="js/particles.js?v=2"></script>
+  <script src="js/typed.js?v=2"></script>
+  <script src="js/main.js?v=2"></script>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SERVICE WORKER — network first
+       Toda vez que o site abre, busca versão nova na rede.
+       Só usa cache se ficar sem internet.
+       ══════════════════════════════════════════════════════════ -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
 
 </body>
 
