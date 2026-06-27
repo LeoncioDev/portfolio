@@ -1,86 +1,41 @@
-/**
- * layout.css — Estrutura e layout global do portfólio
- *
- * Contém:
- * - Textura de ruído no fundo
- * - Cursor glow ciano
- * - Header fixo com nav
- * - Container principal
- * - Hero section
- * - Estrutura das seções numeradas
- * - Animações de reveal
- * - Footer
- * - Breakpoints mobile
- */
+/* ============================================================
+   layout.css — Header, hero, seções, footer
+   ============================================================ */
 
-/* ─── NOISE TEXTURE ─────────────────────────────────────────────────────────
-   SVG inline com filtro feTurbulence cria uma textura de ruído sutil no fundo.
-   pointer-events: none garante que não interfere com cliques.
-   Adiciona profundidade visual sem imagens externas. */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.4;
-}
-
-/* ─── CURSOR GLOW ────────────────────────────────────────────────────────────
-   Círculo radial ciano que segue o cursor via JavaScript (main.js).
-   700px com opacidade 0.12 no centro — visível mas sem exagero.
-   Começa fora da tela (left: -999px) para não aparecer antes do primeiro movimento.
-   Desativado em touch (pointer: coarse) via main.js — não faz sentido em mobile. */
-.glow {
-  position: fixed;
-  width: 700px;
-  height: 700px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.12) 0%, rgba(34, 211, 238, 0.04) 40%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-  transform: translate(-50%, -50%);
-  left: -999px;
-  top: -999px;
-  transition: left 0.08s, top 0.08s;
-}
-
-/* ─── HEADER ─────────────────────────────────────────────────────────────────
-   Fixo no topo. backdrop-filter: blur() cria o efeito de vidro fosco.
-   A sombra é adicionada via JavaScript ao scrollar (main.js). */
+/* ── HEADER ─────────────────────────────────────────────────────*/
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 0 48px;
-  height: 64px;
+  padding: 0 60px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(8, 12, 16, 0.85);
-  backdrop-filter: blur(16px);
+  background: rgba(15, 15, 20, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid var(--border);
+  transition: box-shadow var(--t);
 }
 
-/* Logo — LeôncioDev com D ciano */
+/* Logo — Playfair Display para o nome, elegante */
 .logo {
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
   color: var(--text);
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
 }
 
 .logo span {
-  color: var(--cyan);
+  color: var(--accent);
+  font-style: normal;
 }
 
-/* D em ciano */
-
-/* Nav — links de navegação */
+/* Nav */
 .nav {
   display: flex;
   align-items: center;
@@ -89,31 +44,27 @@ body::before {
 
 .nav-link {
   font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text-dim);
+  font-size: 10px;
+  color: var(--text-3);
   padding: 6px 14px;
   border-radius: 6px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   transition: color var(--t), background var(--t);
 }
 
 .nav-link:hover {
-  color: var(--text-mid);
+  color: var(--text-2);
   background: var(--bg-3);
 }
 
 .nav-link.active {
-  color: var(--cyan);
+  color: var(--accent);
 }
 
-/* definido pelo scroll spy em main.js */
-
-/* Botão GitHub no lado direito do header */
 .header-right {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 .gh-btn {
@@ -122,9 +73,9 @@ body::before {
   gap: 7px;
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--text-mid);
-  padding: 7px 14px;
-  border: 1px solid var(--border);
+  color: var(--text-2);
+  padding: 7px 16px;
+  border: 1px solid var(--border-2);
   border-radius: 7px;
   background: var(--bg-2);
   transition: all var(--t);
@@ -132,269 +83,271 @@ body::before {
 }
 
 .gh-btn:hover {
-  color: var(--cyan);
-  border-color: rgba(34, 211, 238, 0.3);
-  background: var(--cyan-dim);
+  color: var(--accent);
+  border-color: var(--border-3);
+  background: var(--accent-dim);
 }
 
-/* ─── CONTAINER PRINCIPAL ────────────────────────────────────────────────────
-   z-index: 1 garante que o conteúdo fique sobre o noise texture (z-index: 0).
-   max-width: 960px centraliza o conteúdo em telas largas. */
+/* ── MAIN ────────────────────────────────────────────────────── */
 .main {
   position: relative;
   z-index: 1;
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 48px 100px;
+  padding: 0 60px 120px;
 }
 
-/* ─── HERO ───────────────────────────────────────────────────────────────────
-   min-height usa 100svh (Small Viewport Height) em vez de 100vh.
-   O motivo: no Chrome Android, 100vh é calculado com a barra de endereço
-   recolhida (viewport máximo), fazendo o hero ser maior que a tela visível
-   e gerando um espaço em branco gigante antes do conteúdo aparecer.
-   100svh garante que o hero caiba exatamente na área visível com a barra
-   de endereço expandida — o estado inicial de qualquer mobile browser.
-   Fallback para 100vh em navegadores que não suportam svh (< 2023). */
+/* ── HERO ────────────────────────────────────────────────────── */
 .hero {
   min-height: 100vh;
-  /* fallback para browsers antigos */
   min-height: 100svh;
-  /* fix correto para mobile — Chrome/Safari/Firefox modernos */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 64px;
-  /* compensa o header fixo de 64px */
+  padding-top: 100px;
+  padding-bottom: 60px;
   position: relative;
+  overflow: hidden;
 }
 
-/* Gradiente decorativo no canto superior direito — dá profundidade ao hero */
-.hero::after {
-  content: '';
-  position: absolute;
-  top: -100px;
-  right: -200px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.07) 0%, transparent 65%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Garante que o conteúdo fique acima do gradiente decorativo */
 .hero>* {
   position: relative;
   z-index: 1;
 }
 
-/* Tag acima do nome — "Full Stack Developer · Maceió, Brazil" */
-.hero-tag {
+/* Eyebrow */
+.hero-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--mono);
-  font-size: 11px;
-  color: var(--cyan);
-  letter-spacing: 0.14em;
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.20em;
   text-transform: uppercase;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp var(--ts) var(--ease) 0.1s forwards;
 }
 
-/* Linha decorativa antes da tag */
-.hero-tag::before {
-  content: '';
-  display: block;
-  width: 28px;
-  height: 1px;
-  background: var(--cyan);
-}
-
-/* Nome — branco brilhante com text-shadow ciano sutil para dar vida
-   Nota: background-clip: text foi evitado pois causa instabilidade
-   em alguns navegadores deixando o texto invisível/transparente. */
+/* Nome em Playfair — elegante, artístico, com personalidade */
 .hero-name {
-  font-size: clamp(3rem, 6.5vw, 5.5rem);
-  /* levemente maior — impacto profissional */
-  font-weight: 800;
-  color: #f0f8ff;
-  text-shadow: 0 0 80px rgba(34, 211, 238, 0.2);
-  letter-spacing: -0.04em;
-  line-height: 1.0;
-  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 8vw, 7rem);
+  font-weight: 900;
+  color: #fefefe;
+  letter-spacing: -0.03em;
+  line-height: 0.90;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp var(--ts) var(--ease) 0.22s forwards;
 }
 
-/* Cargo — tamanho proporcional ao nome */
-.hero-role {
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
+/* Sobrenome em cinza #979591 — hierarquia visual */
+.hero-name-accent {
+  color: #979591;
+  display: block;
+}
+
+/* Subtítulo com texto digitado */
+.hero-accent-line {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp var(--ts) var(--ease) 0.34s forwards;
+}
+
+.hal-text {
+  font-size: clamp(1rem, 2vw, 1.5rem);
   font-weight: 300;
-  color: var(--text-mid);
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: 28px;
+  color: var(--text-2);
+  white-space: nowrap;
+  min-width: 260px;
 }
 
-.hero-role strong {
-  color: var(--cyan);
+.hal-cursor {
+  color: var(--accent);
+  animation: blink 0.9s step-end infinite;
+  font-style: normal;
+}
+
+.hal-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(151, 149, 145, 0.6), transparent);
+  max-width: 340px;
+}
+
+/* Descrição */
+.hero-desc {
+  font-size: 16px;
+  color: var(--text-2);
+  line-height: 1.90;
+  max-width: 500px;
+  margin-bottom: 44px;
+  opacity: 0;
+  animation: fadeUp var(--ts) var(--ease) 0.46s forwards;
+}
+
+.hero-desc strong {
+  color: var(--text);
   font-weight: 600;
 }
 
-/* Descrição curta abaixo do cargo */
-.hero-desc {
-  font-size: 16px;
-  /* 16px — padrão de legibilidade para descrições em portfólios */
-  color: var(--text-mid);
-  line-height: 1.8;
-  max-width: 520px;
-  margin-bottom: 40px;
-}
-
-/* Botões CTA */
+/* CTAs */
 .hero-cta {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
+  margin-bottom: 64px;
+  opacity: 0;
+  animation: fadeUp var(--ts) var(--ease) 0.58s forwards;
 }
 
-/* Botão primário — fundo ciano com glow estático para chamar atenção */
+/* Botão primário — cinza sólido */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 26px;
-  background: var(--cyan);
-  color: #080c10;
+  padding: 14px 30px;
+  background: #979591;
+  color: #0c0d14;
   font-size: 13px;
   font-weight: 700;
   border-radius: 8px;
   letter-spacing: 0.02em;
   transition: all var(--t);
-  border: 1px solid var(--cyan);
-  box-shadow: 0 0 24px rgba(34, 211, 238, 0.25);
+  border: 2px solid #979591;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(151, 149, 145, 0.3);
+  background: #b0ada9;
+  border-color: #b0ada9;
 }
 
-/* Botão ghost — borda sutil, fica ciano no hover */
+/* Botão ghost */
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 26px;
+  padding: 14px 30px;
   background: transparent;
-  color: var(--text-mid);
+  color: var(--text);
   font-size: 13px;
   font-weight: 500;
   border-radius: 8px;
-  border: 1px solid var(--border);
+  border: 2px solid rgba(151, 149, 145, 0.35);
   letter-spacing: 0.02em;
   transition: all var(--t);
 }
 
 .btn-ghost:hover {
-  color: var(--cyan);
-  border-color: var(--cyan);
-  background: var(--cyan-dim);
-  transform: translateY(-2px);
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  transform: translateY(-3px);
 }
 
-/* Indicador de scroll no rodapé do hero */
-.hero-scroll {
+/* Stats */
+.hero-stats {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 64px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  max-width: 440px;
+  background: var(--bg-2);
+  opacity: 0;
+  animation: fadeUp var(--ts) var(--ease) 0.70s forwards;
+}
+
+.hero-stat {
+  flex: 1;
+  padding: 20px 24px;
+  border-right: 1px solid var(--border);
+  transition: background var(--t);
+}
+
+.hero-stat:last-child {
+  border-right: none;
+}
+
+.hero-stat:hover {
+  background: var(--bg-3);
+}
+
+.hs-num {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.hs-label {
   font-family: var(--mono);
-  font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 0.12em;
+  font-size: 9px;
+  color: var(--text-3);
   text-transform: uppercase;
+  letter-spacing: 0.14em;
 }
 
-.scroll-line {
-  width: 40px;
-  height: 1px;
-  background: var(--border);
-}
-
-/* ─── SEÇÕES NUMERADAS ───────────────────────────────────────────────────────
-   Cada seção tem um número (01, 02...), título e linha decorativa. */
+/* ── SEÇÕES ──────────────────────────────────────────────────── */
 .section {
-  padding: 80px 0;
+  padding: 96px 0;
+  position: relative;
 }
 
 .section-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 40px;
+  gap: 20px;
+  margin-bottom: 52px;
 }
 
 .section-num {
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--cyan);
-  letter-spacing: 0.1em;
+  color: var(--accent);
+  letter-spacing: 0.12em;
 }
 
+/* Título da seção em Playfair — elegante e com personalidade */
 .section-title {
-  font-size: 1.7rem;
-  /* levemente maior para hierarquia clara */
+  font-family: var(--font-display);
+  font-size: 2rem;
   font-weight: 700;
   color: var(--text);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
-/* Linha decorativa que estica à direita do título */
 .section-line {
   flex: 1;
   height: 1px;
-  background: var(--border);
-  max-width: 200px;
+  background: var(--border-2);
+  max-width: 220px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1s var(--ease) 0.2s;
 }
 
-/* ─── REVEAL ANIMATION ───────────────────────────────────────────────────────
-   Elementos com .reveal começam invisíveis e deslocados para baixo.
-   Quando o IntersectionObserver (main.js) adiciona .in, a transição anima.
-   Classes .d1-.d4 adicionam delays escalonados para efeito cascata. */
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity var(--ts) var(--ease), transform var(--ts) var(--ease);
+.section-line.drawn {
+  transform: scaleX(1);
 }
 
-.reveal.in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.d1 {
-  transition-delay: 0.08s;
-}
-
-.d2 {
-  transition-delay: 0.16s;
-}
-
-.d3 {
-  transition-delay: 0.24s;
-}
-
-.d4 {
-  transition-delay: 0.32s;
-}
-
-/* ─── FOOTER ─────────────────────────────────────────────────────────────────
-   Mesmo max-width e padding do .main para alinhamento perfeito. */
+/* ── FOOTER ──────────────────────────────────────────────────── */
 .footer {
   position: relative;
   z-index: 1;
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 20px 48px;
+  padding: 28px 60px;
   border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -406,31 +359,21 @@ body::before {
 .footer-text {
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--text-dim);
+  color: var(--text-3);
   letter-spacing: 0.06em;
 }
 
 .footer-stack {
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--text-dim);
+  color: var(--text-3);
 }
 
 .footer-stack span {
-  color: var(--cyan);
+  color: var(--accent);
 }
 
-/* ─── MOBILE ─────────────────────────────────────────────────────────────────
-   Abaixo de 768px: esconde o nav, reduz padding, corrige hero e seções.
-
-   Problemas corrigidos neste breakpoint:
-   1. Espaço em branco no hero → hero usa min-height: 100svh (definido acima)
-      + padding-top reduzido + justify-content: flex-start para não centralizar
-      verticalmente (em telas pequenas, centralizar gera espaço excessivo embaixo)
-   2. Padding das seções excessivo → reduzido de 56px para 40px
-   3. Espaço do hero-scroll → reduzido de 64px para 32px
-   4. Tamanho do hero-name → clamp já cuida, mas adicionamos mínimo explícito
-   5. hero-desc font-size → reduzido para 15px para melhor legibilidade mobile */
+/* ── MOBILE ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .header {
     padding: 0 20px;
@@ -445,39 +388,29 @@ body::before {
   }
 
   .footer {
-    padding: 16px 20px;
+    padding: 18px 20px;
   }
 
-  /* Hero mobile — não centraliza verticalmente para evitar espaço em branco.
-     Usa padding-top generoso para empurrar o conteúdo abaixo do header fixo
-     e padding-bottom para respiração no fim da seção. */
   .hero {
     justify-content: flex-start;
     padding-top: 100px;
     padding-bottom: 48px;
     min-height: 0;
-    /* remove o min-height no mobile — conteúdo define a altura */
   }
 
   .hero-name {
-    font-size: 2.6rem;
+    font-size: 3rem;
   }
 
   .hero-desc {
     font-size: 15px;
-    margin-bottom: 32px;
   }
 
-  /* Reduz o espaço do "scroll to explore" no mobile */
-  .hero-scroll {
-    margin-top: 32px;
+  .hero-stats {
+    max-width: 100%;
   }
 
   .section {
-    padding: 40px 0;
-  }
-
-  .section-header {
-    margin-bottom: 28px;
+    padding: 56px 0;
   }
 }

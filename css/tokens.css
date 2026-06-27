@@ -1,16 +1,14 @@
-/**
- * tokens.css — Design system do portfólio
- *
- * Define todas as variáveis CSS globais (tokens) usadas em todo o projeto.
- * Centralizar aqui garante consistência visual e facilita mudanças de tema.
- *
- * Importado antes de layout.css e sections.css.
- */
+/* ============================================================
+   tokens.css — João Paulo Leôncio Portfolio
 
-/* Google Fonts — Sora para textos, JetBrains Mono para código e UI técnica */
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+   PALETA: Cinza #979591 + Branco #FEFEFE sobre azul-preto
+   Fundo:  #0c0d14 — azul-preto profundo, sofisticado
+   Acento: #979591 — cinza quente, elegante, não agressivo
+   Texto:  #fefefe — branco limpo, contraste máximo
+   ============================================================ */
 
-/* Reset universal — garante consistência entre navegadores */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
 *,
 *::before,
 *::after {
@@ -20,81 +18,74 @@
 }
 
 :root {
-  /* ── Cores de fundo (do mais escuro ao mais claro) ── */
-  --bg: #080c10;
-  /* fundo principal — quase preto azulado */
-  --bg-2: #0d1520;
-  /* cards e superfícies elevadas — azulado para dar personalidade */
-  --bg-3: #162030;
-  /* hover states e elementos interativos */
+  /* ── Fundos ─────────────────────────────────────────────────
+     Azul-preto profundo — sofisticado, não hacker             */
+  --bg: #0c0d14;
+  --bg-2: #13141e;
+  --bg-3: #1a1b28;
+  --bg-4: #222334;
 
-  /* ── Bordas — mais visíveis que antes para dar estrutura ── */
-  --border: #1e3040;
-  /* borda padrão */
-  --border-hi: rgba(34, 211, 238, 0.3);
-  /* borda com destaque ciano */
+  /* ── Cinza claro elegante — acento principal ────────────────
+     Cinza frio e sofisticado. Contrasta limpo com o fundo
+     escuro sem ser neon nem agressivo.                        */
+  --accent: #979591;
+  --accent-2: #767370;
+  --accent-dim: rgba(151, 149, 145, 0.07);
+  --accent-mid: rgba(151, 149, 145, 0.14);
+  --accent-glow: rgba(151, 149, 145, 0.22);
 
-  /* ── Acento principal — ciano elétrico ── */
-  --cyan: #22d3ee;
-  /* cor primária de destaque */
-  --cyan-dim: rgba(34, 211, 238, 0.10);
-  /* fundo sutil em elementos com acento */
-  --cyan-glow: rgba(34, 211, 238, 0.25);
-  /* glow para efeitos — mais forte que antes */
+  /* ── Texto ──────────────────────────────────────────────────*/
+  --text: #fefefe;
+  /* branco frio limpo                              */
+  --text-2: #979591;
+  /* secundário — cinza médio                       */
+  --text-3: #4a4845;
+  /* sutil — labels, visível mas discreto            */
 
-  /* ── Texto — todos mais legíveis que a versão anterior ── */
-  --text: #f0f8ff;
-  /* texto principal — branco levemente azulado */
-  --text-mid: #90b4c8;
-  /* texto secundário — mais legível no fundo escuro */
-  --text-dim: #445a6a;
-  /* texto sutil — labels e placeholders */
+  /* ── Bordas ─────────────────────────────────────────────────*/
+  --border: rgba(151, 149, 145, 0.08);
+  --border-2: rgba(151, 149, 145, 0.20);
+  --border-3: rgba(151, 149, 145, 0.40);
 
-  /* ── Tipografia ── */
-  --font: 'Sora', sans-serif;
-  /* fonte principal para textos */
+  /* ── Tipografia ─────────────────────────────────────────────
+     Playfair Display = elegância, personalidade, artístico
+     Inter = legibilidade moderna, técnico mas limpo
+     JetBrains Mono = apenas para UI técnica (nav, labels)     */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font: 'Inter', sans-serif;
   --mono: 'JetBrains Mono', monospace;
-  /* fonte monoespaçada para UI técnica */
 
-  /* ── Animações ── */
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
-  /* easing padrão Material Design */
-  --t: 0.18s;
-  /* transição rápida — hovers e estados */
-  --ts: 0.5s;
-  /* transição lenta — reveal animations */
+  /* ── Motion ─────────────────────────────────────────────────*/
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t: 0.22s;
+  --ts: 0.70s;
 }
 
-/* Scroll suave entre seções ao clicar nos links do nav */
 html {
   scroll-behavior: smooth;
 }
 
-/* Estilos base do body */
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font);
   font-size: 15px;
-  /* 15px é o padrão ideal para portfólios profissionais */
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  /* texto mais nítido no macOS/Chrome */
   overflow-x: hidden;
 }
 
-/* Resets básicos */
 a {
   color: inherit;
   text-decoration: none;
 }
 
 button {
-  cursor: pointer;
   background: none;
   border: none;
   font-family: inherit;
   color: inherit;
+  cursor: pointer;
 }
 
 ul {

@@ -5,22 +5,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <meta name="description"
-    content="João Paulo Leôncio — Full Stack Developer from Maceió, Brazil. HTML, CSS, JavaScript, Node.js, React." />
+    content="João Paulo Leôncio — Full Stack Developer from Maceió, Brazil. React, Node.js, Express." />
   <title>João Paulo Leôncio — Full Stack Developer</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- CSS: tokens → animations → layout → sections -->
   <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/sections.css" />
 </head>
 
 <body>
 
+  <!-- Cursor glow — movido via lerp em main.js -->
   <div class="glow" id="glow"></div>
 
-  <!-- HEADER -->
+  <!-- ══════════════════════════════════════════════════════════
+       HEADER
+       ══════════════════════════════════════════════════════════ -->
   <header class="header">
-    <span class="logo">Leôncio<span>D</span>ev</span>
 
+    <!-- Logo: LeôncioDev em Playfair Display -->
+    <span class="logo">Leôncio<span>Dev</span></span>
+
+    <!-- Nav: data-section usado pelo scroll spy em main.js -->
     <nav class="nav">
       <a href="#about" class="nav-link active" data-section="about">About</a>
       <a href="#stack" class="nav-link" data-section="stack">Stack</a>
@@ -28,90 +37,167 @@
       <a href="#contact" class="nav-link" data-section="contact">Contact</a>
     </nav>
 
+    <!-- Botão GitHub -->
     <div class="header-right">
       <a href="https://github.com/LeoncioDev" target="_blank" rel="noopener" class="gh-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path
             d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
         </svg>
         GitHub
       </a>
     </div>
+
   </header>
 
   <main class="main">
 
-    <!-- HERO -->
+    <!-- ══════════════════════════════════════════════════════════
+         HERO
+         id="about" = seção reconhecida pelo scroll spy
+         ══════════════════════════════════════════════════════════ -->
     <section class="hero" id="about">
-      <p class="hero-tag reveal">Full Stack Developer · Maceió, Brazil</p>
-      <h1 class="hero-name reveal d1">João Paulo<br>Leôncio</h1>
-      <p class="hero-role reveal d2">Building things for the <strong>web.</strong></p>
-      <p class="hero-desc reveal d3">
-        I build complete web products — from the API that powers the data
-        to the interface that makes it beautiful. React on the front,
-        Node.js on the back, and whatever the problem needs in between.
+
+      <!-- Eyebrow com ponto pulsante — identidade e localização -->
+      <p class="hero-eyebrow">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        Full Stack Developer &nbsp;·&nbsp; Maceió, Brazil
       </p>
-      <div class="hero-cta reveal d4">
+
+      <!-- Nome principal em Playfair Display — tipografia com peso e elegância -->
+      <h1 class="hero-name">
+        João Paulo<br>
+        <!-- Sobrenome em cinza #979591 — hierarquia visual -->
+        <span class="hero-name-accent">Leôncio</span>
+      </h1>
+
+      <!-- Texto digitado + cursor piscante + linha decorativa -->
+      <div class="hero-accent-line">
+        <span class="hal-text">
+          <!-- .hal-typed é preenchido via typed.js -->
+          <!-- Frase fixa: "Full Stack Developer." -->
+          <span class="hal-typed"></span>
+          <!-- Cursor piscante: animação blink em animations.css -->
+          <span class="hal-cursor" aria-hidden="true">|</span>
+        </span>
+        <span class="hal-line"></span>
+      </div>
+
+      <!-- Descrição — voz direta, sem frescura, sem template -->
+      <p class="hero-desc">
+        I don't just write code.<br>
+        I build the whole thing — from the API to the interface —<br>
+        until it's exactly <strong>the way it has to be</strong>.
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-cta">
         <a href="#projects" class="btn-primary">See my work</a>
         <a href="mailto:leonciodev@proton.me" class="btn-ghost">Get in touch</a>
       </div>
-      <div class="hero-scroll reveal d4">
-        <span class="scroll-line"></span>
-        scroll to explore
+
+      <!-- Stats: números reais e diretos -->
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <!-- Projetos publicados e no ar -->
+          <div class="hs-num">3+</div>
+          <div class="hs-label">Live projects</div>
+        </div>
+        <div class="hero-stat">
+          <!-- Frontend e backend — os dois lados -->
+          <div class="hs-num">Front</div>
+          <div class="hs-label">& Backend</div>
+        </div>
+        <div class="hero-stat">
+          <!-- Maceió, Brazil -->
+          <div class="hs-num">BR</div>
+          <div class="hs-label">Maceió, Brazil</div>
+        </div>
       </div>
+
+      <!-- Scroll indicator animado — convida o usuário a rolar -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-wheel"></div>
+        <span>scroll</span>
+      </div>
+
     </section>
 
-    <!-- ABOUT -->
+    <!-- ══════════════════════════════════════════════════════════
+         ABOUT
+         ══════════════════════════════════════════════════════════ -->
     <section class="section" id="about-detail">
+
       <div class="section-header reveal">
         <span class="section-num">01</span>
         <h2 class="section-title">About</h2>
+        <!-- Linha que se desenha via initSectionLines() em main.js -->
         <span class="section-line"></span>
       </div>
 
       <div class="about-grid">
+
         <div>
           <p class="about-text reveal d1">
-            Developer from Maceió, Brazil. I started building backends and
-            fell in love with the full picture — not just the logic behind the
-            curtain, but the interface that makes it usable and the design that
-            makes people want to use it.
+            Developer from Maceió, Brazil. Started with backends and fell in love
+            with the full picture — not just the logic behind the curtain, but the
+            interface that makes it usable and the design that makes people
+            <strong>want</strong> to use it.
           </p>
           <p class="about-text reveal d2">
-            I build complete products: the API, the database connections, the
-            frontend — and I ship the whole thing. No half-finished backends
-            waiting for someone else. Currently studying Systems Analysis and
-            Development at CESMAC.
+            Off the code: single-player games, music while working, and
+            building my own game in Godot. Perfectionist by nature —
+            I don't ship until it's right. Currently studying Systems Analysis
+            and Development at CESMAC.
           </p>
         </div>
 
+        <!-- Card de info pessoal -->
         <div class="about-info reveal d2">
+
           <div class="info-row">
             <span class="info-label">Location</span>
             <span class="info-value">Maceió, Alagoas — Brazil</span>
           </div>
+
           <div class="info-row">
             <span class="info-label">Education</span>
             <span class="info-value">ADS · CESMAC · 2026</span>
           </div>
+
           <div class="info-row">
             <span class="info-label">Focus</span>
+            <!-- React e Node.js = suas tecnologias principais -->
             <span class="info-value">React · Node.js · Full Stack</span>
           </div>
+
           <div class="info-row">
             <span class="info-label">LinkedIn</span>
-            <span class="info-value"><a href="https://linkedin.com/in/leonciodev" target="_blank">leonciodev</a></span>
+            <span class="info-value">
+              <a href="https://linkedin.com/in/leonciodev" target="_blank" rel="noopener">
+                leonciodev
+              </a>
+            </span>
           </div>
+
           <div class="info-row">
             <span class="info-label">Email</span>
-            <span class="info-value"><a href="mailto:leonciodev@proton.me">leonciodev@proton.me</a></span>
+            <span class="info-value">
+              <a href="mailto:leonciodev@proton.me">leonciodev@proton.me</a>
+            </span>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- STACK -->
+    <!-- ══════════════════════════════════════════════════════════
+         STACK
+         Apenas habilidades reais — tecnologias que você domina.
+         APIs e ferramentas de projetos específicos ficam nos cards.
+         ══════════════════════════════════════════════════════════ -->
     <section class="section" id="stack">
+
       <div class="section-header reveal">
         <span class="section-num">02</span>
         <h2 class="section-title">Stack</h2>
@@ -120,54 +206,48 @@
 
       <div class="stack-list">
 
+        <!-- Languages & Frameworks -->
         <div class="stack-row reveal d1">
-          <span class="stack-cat">Frontend</span>
+          <span class="stack-cat">Languages</span>
           <div class="tags">
-            <span class="tag tag-hi">React</span>
+            <span class="tag tag-hi">HTML</span>
+            <span class="tag tag-hi">CSS</span>
             <span class="tag tag-hi">JavaScript</span>
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-            <span class="tag">Tailwind CSS</span>
           </div>
         </div>
 
+        <!-- Frameworks & Libraries -->
         <div class="stack-row reveal d2">
-          <span class="stack-cat">Backend</span>
+          <span class="stack-cat">Frameworks</span>
           <div class="tags">
+            <span class="tag tag-hi">React</span>
             <span class="tag tag-hi">Node.js</span>
-            <span class="tag tag-hi">Express</span>
+            <span class="tag">Express</span>
             <span class="tag">REST APIs</span>
             <span class="tag">WebSocket</span>
           </div>
         </div>
 
+        <!-- Sistema operacional e editor — o ambiente onde você trabalha -->
         <div class="stack-row reveal d3">
-          <span class="stack-cat">AI / Data</span>
+          <span class="stack-cat">Environment</span>
           <div class="tags">
-            <span class="tag">LLaMA 3.3 70B</span>
-            <span class="tag">LLaMA 3.1 8B</span>
-            <span class="tag">Groq API</span>
-            <span class="tag">Binance API</span>
-            <span class="tag">GitHub API</span>
-            <span class="tag">CoinGecko API</span>
-          </div>
-        </div>
-
-        <div class="stack-row reveal d4">
-          <span class="stack-cat">Tools</span>
-          <div class="tags">
-            <span class="tag">Git</span>
             <span class="tag">Linux</span>
             <span class="tag">VS Code</span>
-            <span class="tag">npm</span>
+            <span class="tag">Git</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- ══════════════════════════════════════════════════════════
+         PROJECTS
+         As tags dos projetos mostram tecnologias UTILIZADAS
+         naquele projeto específico — diferente da Stack geral.
+         ══════════════════════════════════════════════════════════ -->
     <section class="section" id="projects">
+
       <div class="section-header reveal">
         <span class="section-num">03</span>
         <h2 class="section-title">Projects</h2>
@@ -176,12 +256,12 @@
 
       <div class="projects-list">
 
-        <!-- Scrutiny -->
-        <!-- O card agora é um <article> — não é mais um link clicável inteiro.
-             Os botões dentro do .project-actions assumem a navegação.
-             Isso segue o padrão profissional de 2025/2026 onde cada ação
-             tem seu próprio alvo claro (Demo vs GitHub). -->
+        <!-- ── Scrutiny ──────────────────────────────────────── -->
+        <!-- <article> semântico — não é um link inteiro.
+             Dois botões separados: Live Demo + GitHub.           -->
         <article class="project-card reveal">
+
+          <!-- Header estilo terminal macOS -->
           <div class="project-terminal">
             <div class="tdots">
               <span class="td td-r"></span>
@@ -190,29 +270,35 @@
             </div>
             <span class="tpath">~/projects/scrutiny</span>
           </div>
+
+          <!-- Screenshot do projeto -->
           <div class="project-img-wrap">
-            <img src="assets/screenshots/tela_limpa.png" alt="Scrutiny" class="project-img" loading="lazy" />
+            <img src="assets/screenshots/tela_limpa.png" alt="Scrutiny — AI-powered GitHub profile analyzer"
+              class="project-img" loading="lazy" />
           </div>
+
           <div class="project-info">
+
             <div class="project-header-row">
               <h3 class="project-name">Scrutiny</h3>
-              <span class="project-badge">AI · Node.js</span>
+              <!-- Badge mostra o tipo e tecnologia principal do projeto -->
+              <span class="project-badge">Node.js · AI Pipeline</span>
             </div>
+
             <p class="project-desc">
-              AI-powered GitHub profile analyzer. Enter any username and get a full
-              technical report — code quality, inferred seniority, language patterns,
-              and job-fit score. Dual-model pipeline: LLaMA 3.1 8B filters repos,
-              LLaMA 3.3 70B runs the deep analysis via Groq.
+              AI-powered GitHub profile analyzer. Dual-model pipeline:
+              LLaMA 3.1 8B filters repos, LLaMA 3.3 70B runs deep analysis via Groq.
+              Outputs seniority score, code patterns, and job-fit rating.
             </p>
+
+            <!-- Tags = tecnologias utilizadas NESTE projeto específico -->
             <div class="project-tags">
               <span class="project-tag">Groq API</span>
               <span class="project-tag">LLaMA 3.3 70B</span>
               <span class="project-tag">GitHub API</span>
-              <span class="project-tag">HTML / CSS / JS</span>
+              <span class="project-tag">HTML · CSS · JS</span>
             </div>
-            <!-- Botões de ação: Live Demo (primário) + GitHub (secundário).
-                 stopPropagation() previne que o clique nos botões
-                 acione eventos do card pai. -->
+
             <div class="project-actions">
               <a href="https://scrutiny.leonciodev.me" target="_blank" rel="noopener"
                 class="project-btn project-btn-primary" onclick="event.stopPropagation()">
@@ -223,11 +309,13 @@
                 GitHub ↗
               </a>
             </div>
+
           </div>
         </article>
 
-        <!-- Zenith -->
+        <!-- ── Zenith ─────────────────────────────────────────── -->
         <article class="project-card reveal d1">
+
           <div class="project-terminal">
             <div class="tdots">
               <span class="td td-r"></span>
@@ -236,25 +324,32 @@
             </div>
             <span class="tpath">~/projects/zenith</span>
           </div>
+
           <div class="project-img-wrap">
-            <img src="assets/screenshots/zenith.png" alt="Zenith" class="project-img" loading="lazy" />
+            <img src="assets/screenshots/zenith.png" alt="Zenith — Real-time crypto dashboard" class="project-img"
+              loading="lazy" />
           </div>
+
           <div class="project-info">
+
             <div class="project-header-row">
               <h3 class="project-name">Zenith</h3>
-              <span class="project-badge">Real-time · Node.js</span>
+              <span class="project-badge">Node.js · Real-time</span>
             </div>
+
             <p class="project-desc">
               Real-time crypto dashboard with multiple themes. Live price feeds via
               Binance WebSocket, Fear &amp; Greed index, historical data from CoinGecko,
               currency converter — all updating without a single page refresh.
             </p>
+
             <div class="project-tags">
               <span class="project-tag">WebSocket</span>
               <span class="project-tag">Binance API</span>
               <span class="project-tag">CoinGecko API</span>
-              <span class="project-tag">HTML / CSS / JS</span>
+              <span class="project-tag">HTML · CSS · JS</span>
             </div>
+
             <div class="project-actions">
               <a href="https://zenith.leonciodev.me" target="_blank" rel="noopener"
                 class="project-btn project-btn-primary" onclick="event.stopPropagation()">
@@ -265,14 +360,18 @@
                 GitHub ↗
               </a>
             </div>
+
           </div>
         </article>
 
       </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- ══════════════════════════════════════════════════════════
+         CONTACT
+         ══════════════════════════════════════════════════════════ -->
     <section class="section" id="contact">
+
       <div class="section-header reveal">
         <span class="section-num">04</span>
         <h2 class="section-title">Contact</h2>
@@ -280,7 +379,9 @@
       </div>
 
       <div class="contact-wrap">
+
         <div class="reveal d1">
+          <!-- "something." em cinza — detalhe de hierarquia -->
           <h3 class="contact-heading">
             Let's build<br><span>something.</span>
           </h3>
@@ -290,6 +391,7 @@
           </p>
         </div>
 
+        <!-- Links deslizam para a direita no hover -->
         <div class="contact-links reveal d2">
           <a href="mailto:leonciodev@proton.me" class="contact-link">
             <span class="cl-label">Email</span>
@@ -304,17 +406,34 @@
             <span class="cl-value">github.com/LeoncioDev ↗</span>
           </a>
         </div>
+
       </div>
     </section>
 
   </main>
 
+  <!-- ══════════════════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════════════════ -->
   <footer class="footer">
     <span class="footer-text">© 2026 João Paulo Leôncio · Maceió, Brazil</span>
+    <!-- Stack em cinza — detalhe final de identidade -->
     <span class="footer-stack">Built with <span>HTML · CSS · JS</span></span>
   </footer>
 
+  <!-- ══════════════════════════════════════════════════════════
+       SCRIPTS — ordem importa:
+       deco.js     → elemento geométrico decorativo (canvas fixo)
+       cursor.js   → cursor personalizado (dot + ring)
+       particles.js → partículas em toda a tela (canvas fixo)
+       typed.js    → efeito de digitação no hero
+       main.js     → scroll spy, reveal, header, glow, section lines
+       ══════════════════════════════════════════════════════════ -->
+  <script src="js/cursor.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/typed.js"></script>
   <script src="js/main.js"></script>
+
 </body>
 
 </html>

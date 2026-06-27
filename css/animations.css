@@ -1,0 +1,396 @@
+/* ============================================================
+   animations.css — Efeitos visuais elegantes
+   Sem hacker. Sem scanlines. Sem glitch.
+   Animações suaves, premium, artísticas.
+   ============================================================ */
+
+/* ── GRID DECORATIVO DE FUNDO ──────────────────────────────────
+   Pontos em vez de linhas — mais elegante, menos terminal      */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle,
+            rgba(151, 149, 145, 0.06) 1px,
+            transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── CURSOR GLOW ────────────────────────────────────────────────
+   Círculo cinza suave que segue o cursor via lerp em main.js   */
+.glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(151, 149, 145, 0.07) 0%,
+            rgba(151, 149, 145, 0.02) 40%,
+            transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    left: -999px;
+    top: -999px;
+}
+
+/* ── KEYFRAMES GLOBAIS ──────────────────────────────────────────*/
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    50%,
+    100% {
+        left: 150%;
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+@keyframes scroll-dot {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+}
+
+@keyframes line-draw {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* ── REVEAL ON SCROLL ───────────────────────────────────────────*/
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity var(--ts) var(--ease), transform var(--ts) var(--ease);
+}
+
+.reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.d1 {
+    transition-delay: 0.08s;
+}
+
+.d2 {
+    transition-delay: 0.17s;
+}
+
+.d3 {
+    transition-delay: 0.26s;
+}
+
+.d4 {
+    transition-delay: 0.35s;
+}
+
+/* ── SECTION LINE QUE SE DESENHA ────────────────────────────────
+   transform-origin: left = cresce da esquerda para direita     */
+.section-line {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1s var(--ease) 0.2s;
+}
+
+.section-line.drawn {
+    transform: scaleX(1);
+}
+
+/* ── HOVER LIFT ─────────────────────────────────────────────────
+   Cards sobem suavemente no hover                              */
+.hover-lift {
+    transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px var(--accent-dim);
+}
+
+/* ── SHIMMER NO BOTÃO PRIMÁRIO ──────────────────────────────────*/
+.btn-primary {
+    overflow: hidden;
+    position: relative;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 3.5s ease-in-out infinite;
+}
+
+/* ── PULSE DOT ──────────────────────────────────────────────────*/
+.pulse-dot {
+    position: relative;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+
+.pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ── SCROLL INDICATOR ───────────────────────────────────────────*/
+.scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 60px;
+    opacity: 0;
+    animation: fadeIn 0.6s var(--ease) 1.4s forwards;
+}
+
+.scroll-indicator span {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-3);
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+}
+
+.scroll-wheel {
+    width: 22px;
+    height: 36px;
+    border: 1.5px solid var(--border-2);
+    border-radius: 11px;
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+}
+
+.scroll-wheel::before {
+    content: '';
+    width: 3px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 2px;
+    animation: scroll-dot 2s ease-in-out infinite;
+}
+
+/* ── ABOUT INFO — border-left animada ───────────────────────────*/
+.info-row {
+    border-left: 2px solid transparent;
+    transition: background var(--t), border-color var(--t), padding-left var(--t);
+}
+
+.info-row:hover {
+    border-left-color: var(--accent);
+    padding-left: 22px;
+}
+
+/* ── TAG HOVER ──────────────────────────────────────────────────*/
+.tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--accent-dim);
+}
+
+/* ── NÚMERO DECORATIVO DE FUNDO ─────────────────────────────────
+   Número enorme semi-transparente por trás de cada seção       */
+.section-bg-num {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 14vw, 11rem);
+    font-weight: 900;
+    color: var(--accent);
+    opacity: 0.035;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    letter-spacing: -0.05em;
+}
+
+/* ── CONTACT LINK ───────────────────────────────────────────────*/
+.contact-link:hover .cl-value {
+    color: var(--accent);
+}
+
+/* ── STACK TAG ENTRADA ESCALONADA ───────────────────────────────*/
+.tag-animate {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.tag-animate.in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .section-bg-num {
+        display: none;
+    }
+}
+
+/* ============================================================
+   CURSOR PERSONALIZADO
+   ============================================================ */
+
+/* Esconde cursor padrão em tudo */
+*,
+*::before,
+*::after {
+    cursor: none !important;
+}
+
+/* Ponto cinza pequeno e preciso */
+#cursor-dot {
+    position: fixed;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition:
+        transform 0.12s var(--ease),
+        width 0.25s var(--ease),
+        height 0.25s var(--ease),
+        opacity 0.2s ease;
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* Anel externo que segue com delay */
+#cursor-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(151, 149, 145, 0.55);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition:
+        transform 0.15s var(--ease),
+        width 0.28s var(--ease),
+        height 0.28s var(--ease),
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+/* Estado hover — anel expande e fica cinza */
+body.cursor-hover #cursor-dot {
+    width: 5px;
+    height: 5px;
+    opacity: 0.5;
+}
+
+body.cursor-hover #cursor-ring {
+    width: 54px;
+    height: 54px;
+    border-color: var(--accent);
+    background: rgba(151, 149, 145, 0.05);
+}
+
+/* Mobile: esconde os elementos de cursor */
+@media (pointer: coarse) {
+
+    #cursor-dot,
+    #cursor-ring {
+        display: none;
+    }
+
+    * {
+        cursor: auto !important;
+    }
+}

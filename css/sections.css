@@ -1,30 +1,20 @@
-/**
- * sections.css — Estilos específicos de cada seção do portfólio
- *
- * Contém:
- * - About (grid texto + card de info)
- * - Stack (lista de tecnologias por categoria)
- * - Projects (cards com terminal header + imagem + botões de ação)
- * - Contact (heading + links)
- * - Breakpoints mobile para cada seção
- */
+/* ============================================================
+   sections.css — About, Stack, Projects, Contact
+   ============================================================ */
 
-/* ─── ABOUT ──────────────────────────────────────────────────────────────────
-   Grid de duas colunas: texto à esquerda, card de info à direita.
-   Em mobile colapsa para uma coluna. */
+/* ── ABOUT ──────────────────────────────────────────────────── */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 260px;
-  gap: 48px;
+  grid-template-columns: 1fr 280px;
+  gap: 60px;
   align-items: start;
 }
 
-/* Parágrafos do texto de apresentação */
 .about-text {
   font-size: 15px;
-  color: var(--text-mid);
-  line-height: 1.85;
-  margin-bottom: 14px;
+  color: var(--text-2);
+  line-height: 1.95;
+  margin-bottom: 18px;
 }
 
 .about-text:last-of-type {
@@ -36,25 +26,22 @@
   font-weight: 600;
 }
 
-/* Card de informações (localização, educação, email, etc.) */
+/* Card de info */
 .about-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
   background: var(--bg-2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  border: 1px solid var(--border-2);
+  border-radius: 14px;
   overflow: hidden;
 }
 
-/* Linha individual do card */
 .info-row {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 12px 16px;
+  gap: 3px;
+  padding: 14px 20px;
   border-bottom: 1px solid var(--border);
-  transition: background var(--t);
+  border-left: 2px solid transparent;
+  transition: background var(--t), border-color var(--t), padding-left var(--t);
 }
 
 .info-row:last-child {
@@ -63,47 +50,48 @@
 
 .info-row:hover {
   background: var(--bg-3);
+  border-left-color: var(--accent);
+  padding-left: 24px;
 }
 
-/* Label pequena acima do valor (ex: "LOCATION") */
 .info-label {
   font-family: var(--mono);
   font-size: 9px;
-  color: var(--text-dim);
+  color: var(--text-3);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
 }
 
-/* Valor da informação */
 .info-value {
   font-size: 13px;
-  color: var(--text-mid);
+  color: var(--text-2);
 }
 
 .info-value a {
-  color: var(--cyan);
+  color: var(--accent);
   transition: opacity var(--t);
 }
 
 .info-value a:hover {
-  opacity: 0.75;
+  opacity: 0.72;
 }
 
-/* ─── STACK ──────────────────────────────────────────────────────────────────
-   Lista de tecnologias organizada por categoria (Frontend, Backend, etc.).
-   Grid de duas colunas: categoria à esquerda, tags à direita. */
+.info-value.accent {
+  color: var(--accent);
+}
+
+/* ── STACK ──────────────────────────────────────────────────── */
 .stack-list {
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 .stack-row {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 110px 1fr;
   align-items: start;
-  gap: 24px;
-  padding: 14px 0;
+  gap: 28px;
+  padding: 18px 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -111,107 +99,91 @@
   border-top: 1px solid var(--border);
 }
 
-/* Label da categoria (ex: "FRONTEND") */
 .stack-cat {
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
+  color: var(--text-3);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding-top: 4px;
+  padding-top: 5px;
 }
 
-/* Container das tags de tecnologia */
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-/* Tag individual */
 .tag {
   font-family: var(--mono);
   font-size: 11px;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 20px;
   background: var(--bg-2);
   border: 1px solid var(--border);
-  color: var(--text-mid);
+  color: var(--text-2);
   transition: all var(--t);
   cursor: default;
 }
 
 .tag:hover {
-  border-color: var(--cyan);
-  color: var(--cyan);
-  background: var(--cyan-dim);
-}
-
-/* Variante destacada — tecnologias foco (React, Node.js, Tailwind) */
-.tag-hi {
-  background: var(--cyan-dim);
-  border-color: rgba(34, 211, 238, 0.25);
-  color: var(--cyan);
-}
-
-/* ─── PROJECTS ───────────────────────────────────────────────────────────────
-   Cards com:
-   - Header estilo terminal (dots + path)
-   - Imagem à esquerda
-   - Informações à direita (nome, descrição, tags, botões)
-   - Dois botões de ação: Live Demo (primário) + GitHub (secundário)
-
-   Decisão de design:
-   O card passou de <a> (link inteiro) para <article> (container semântico).
-   Isso é o padrão profissional de 2025/2026 — separar claramente as duas
-   ações (demo vs código) melhora a UX e sinaliza maturidade para recrutadores.
-   Fonte: pesquisa de portfolios de devs top no GitHub e artigos UX 2025/2026. */
-.projects-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Card — grid de duas colunas: imagem | info */
-.project-card {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  background: var(--bg-2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: border-color var(--t), box-shadow var(--t), transform var(--t);
-}
-
-/* Hover com glow ciano sutil ao redor do card */
-.project-card:hover {
-  border-color: rgba(34, 211, 238, 0.4);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(34, 211, 238, 0.06);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
   transform: translateY(-2px);
 }
 
-/* Header estilo terminal — ocupa as duas colunas com grid-column: 1 / -1 */
+/* Tags destacadas */
+.tag-hi {
+  background: var(--accent-dim);
+  border-color: var(--border-2);
+  color: var(--accent);
+}
+
+/* ── PROJECTS ────────────────────────────────────────────────── */
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-card {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+}
+
+.project-card:hover {
+  border-color: var(--border-2);
+  transform: translateY(-5px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 50px var(--accent-dim);
+}
+
+/* Header terminal — mais elegante que antes */
 .project-terminal {
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
+  gap: 10px;
+  padding: 10px 20px;
   background: var(--bg-3);
   border-bottom: 1px solid var(--border);
 }
 
-/* Dots decorativos do terminal (vermelho, amarelo, verde) */
 .tdots {
   display: flex;
-  gap: 5px;
+  gap: 6px;
 }
 
 .td {
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
-  opacity: 0.4;
+  opacity: 0.28;
   transition: opacity var(--t);
 }
 
@@ -219,7 +191,6 @@
   opacity: 1;
 }
 
-/* dots ficam opacos no hover */
 .td-r {
   background: #ff5f57;
 }
@@ -232,44 +203,56 @@
   background: #28c840;
 }
 
-/* Caminho do projeto no terminal (ex: ~/projects/zenith) */
 .tpath {
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--text-dim);
+  color: var(--text-3);
   flex: 1;
   margin-left: 8px;
 }
 
-/* Wrapper da imagem */
+/* Imagem */
 .project-img-wrap {
   position: relative;
   overflow: hidden;
-  min-height: 180px;
+  min-height: 210px;
 }
 
-/* Imagem — brightness 0.75 visível desde o início, satura no hover */
 .project-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top;
-  filter: brightness(0.75) saturate(0.7);
+  filter: brightness(0.62) saturate(0.6);
   transition: filter var(--ts), transform var(--ts);
 }
 
 .project-card:hover .project-img {
-  filter: brightness(0.95) saturate(1.0);
-  transform: scale(1.04);
+  filter: brightness(0.88) saturate(1.1);
+  transform: scale(1.06);
 }
 
-/* Área de informações do projeto */
+/* Overlay cinza sutil no hover */
+.project-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(151, 149, 145, 0.08), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--ts);
+}
+
+.project-card:hover .project-img-wrap::after {
+  opacity: 1;
+}
+
+/* Info */
 .project-info {
-  padding: 20px 24px;
+  padding: 26px 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: 13px;
 }
 
 .project-header-row {
@@ -279,9 +262,10 @@
   gap: 10px;
 }
 
-/* Nome do projeto — fica ciano no hover do card */
+/* Nome do projeto em Playfair */
 .project-name {
-  font-size: 1.15rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.02em;
@@ -289,29 +273,26 @@
 }
 
 .project-card:hover .project-name {
-  color: var(--cyan);
+  color: var(--accent);
 }
 
-/* Badge de tecnologia (ex: "AI · Node.js") */
 .project-badge {
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--cyan);
-  background: var(--cyan-dim);
-  border: 1px solid rgba(34, 211, 238, 0.2);
-  padding: 2px 10px;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--border-2);
+  padding: 3px 10px;
   border-radius: 20px;
   white-space: nowrap;
 }
 
-/* Descrição do projeto */
 .project-desc {
   font-size: 13px;
-  color: var(--text-mid);
-  line-height: 1.7;
+  color: var(--text-2);
+  line-height: 1.80;
 }
 
-/* Tags de stack do projeto */
 .project-tags {
   display: flex;
   flex-wrap: wrap;
@@ -321,146 +302,131 @@
 .project-tag {
   font-family: var(--mono);
   font-size: 10px;
-  padding: 2px 8px;
+  padding: 3px 9px;
   border-radius: 4px;
   background: var(--bg-3);
   border: 1px solid var(--border);
-  color: var(--text-dim);
+  color: var(--text-3);
 }
 
-/* ── Botões de ação do projeto ───────────────────────────────────────────────
-   Dois botões lado a lado: Live Demo (ciano sólido) e GitHub (ghost).
-   Borda de 2px nos dois para ter presença visual igual aos botões do hero —
-   foi o ajuste pedido para deixar os botões menos discretos no card.
-
-   Live Demo é sempre o primeiro — padrão UX para portfolios de dev:
-   recrutadores clicam em demo primeiro, código depois. */
 .project-actions {
   display: flex;
   gap: 8px;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
-/* Base comum dos botões do projeto */
 .project-btn {
   display: inline-flex;
   align-items: center;
   font-family: var(--mono);
   font-size: 11px;
-  font-weight: 500;
-  padding: 7px 14px;
-  border-radius: 6px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
   letter-spacing: 0.04em;
-  text-decoration: none;
   transition: all var(--t);
   white-space: nowrap;
 }
 
-/* Live Demo — fundo ciano com borda 2px, igual ao btn-primary do hero */
 .project-btn-primary {
-  background: var(--cyan);
-  color: #080c10;
-  border: 2px solid var(--cyan);
+  background: var(--accent);
+  color: #0f0f14;
+  border: 2px solid var(--accent);
   font-weight: 700;
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
 }
 
 .project-btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(34, 211, 238, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px var(--accent-glow);
+  background: var(--accent-2);
+  border-color: var(--accent-2);
 }
 
-/* GitHub — ghost com borda 2px, igual ao btn-ghost do hero */
 .project-btn-ghost {
   background: transparent;
-  color: var(--text-mid);
-  border: 2px solid var(--border);
+  color: var(--text-2);
+  border: 2px solid var(--border-2);
 }
 
 .project-btn-ghost:hover {
-  color: var(--cyan);
-  border-color: var(--cyan);
-  background: var(--cyan-dim);
-  transform: translateY(-1px);
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  transform: translateY(-2px);
 }
 
-/* ─── CONTACT ────────────────────────────────────────────────────────────────
-   Grid de duas colunas: heading à esquerda, links à direita. */
+/* ── CONTACT ─────────────────────────────────────────────────── */
 .contact-wrap {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 60px;
   align-items: start;
 }
 
-/* Heading grande com palavra em ciano */
+/* Heading em Playfair */
 .contact-heading {
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 700;
   color: var(--text);
-  letter-spacing: -0.04em;
-  line-height: 1.1;
-  margin-bottom: 10px;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  margin-bottom: 16px;
 }
 
 .contact-heading span {
-  color: var(--cyan);
+  color: var(--accent);
 }
 
 .contact-sub {
   font-size: 14px;
-  color: var(--text-mid);
-  line-height: 1.75;
+  color: var(--text-2);
+  line-height: 1.85;
 }
 
-/* Lista de links de contato */
 .contact-links {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-/* Link individual — desliza para direita no hover */
 .contact-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 18px;
+  padding: 16px 22px;
   background: var(--bg-2);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  text-decoration: none;
+  border-radius: 12px;
   transition: all var(--t);
 }
 
 .contact-link:hover {
-  border-color: rgba(34, 211, 238, 0.3);
+  border-color: var(--border-2);
   background: var(--bg-3);
-  transform: translateX(4px);
+  transform: translateX(6px);
+  box-shadow: 0 0 30px var(--accent-dim);
 }
 
-/* Label pequena (ex: "EMAIL") */
 .cl-label {
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--text-dim);
+  color: var(--text-3);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
 }
 
-/* Valor — fica ciano no hover */
 .cl-value {
   font-size: 13px;
-  color: var(--text-mid);
+  color: var(--text-2);
   transition: color var(--t);
 }
 
 .contact-link:hover .cl-value {
-  color: var(--cyan);
+  color: var(--accent);
 }
 
-/* ─── MOBILE ─────────────────────────────────────────────────────────────────
-   Todas as grids de duas colunas colapsam para uma coluna. */
+/* ── MOBILE ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .about-grid {
     grid-template-columns: 1fr;
@@ -471,7 +437,7 @@
   }
 
   .project-img-wrap {
-    min-height: 160px;
+    min-height: 180px;
   }
 
   .stack-row {
@@ -481,10 +447,9 @@
 
   .contact-wrap {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 36px;
   }
 
-  /* Em mobile os botões quebram linha se não couberem */
   .project-actions {
     flex-wrap: wrap;
   }
